@@ -1,20 +1,51 @@
 // LOGIN BUTTON EVENT HANDLER
+//const loginButton = document.getElementById("login");
+//loginButton.addEventListener("click", function(){
+ ///   const loginArea = document.getElementById("login-area");
+ //   loginArea.style.display = "none";
+   // const transactionArea = document.getElementById("transaction-area");
+    //const emailInfo = document.getElementById("email").value;
+    //const passwordInfo = document.getElementById("password").value;
+    //if(emailInfo == "danielkielfriis25@outlook.dk" && passwordInfo == "dDz4Zs569fNH"){
+     //   transactionArea.style.display = "block";
+      //  alert("Login Successful")
+    //}
+    //else{
+     //   alert("You have entered wrong password")
+      //  loginArea.style.display = "block";
+    //}
+//})
+
+// LOGIN BUTTON EVENT HANDLER
 const loginButton = document.getElementById("login");
-loginButton.addEventListener("click", function(){
-    const loginArea = document.getElementById("login-area");
-    loginArea.style.display = "none";
-    const transactionArea = document.getElementById("transaction-area");
-    const emailInfo = document.getElementById("email").value;
-    const passwordInfo = document.getElementById("password").value;
-    if(emailInfo == "danielkielfriis25@outlook.dk" && passwordInfo == "dDz4Zs569fNH"){
-        transactionArea.style.display = "block";
-        alert("Login Successful")
-    }
-    else{
-        alert("You have entered wrong password")
-        loginArea.style.display = "block";
-    }
-})
+const logoutButton = document.getElementById("logout-button");
+
+loginButton.addEventListener("click", function() {
+  const loginArea = document.getElementById("login-area");
+  loginArea.style.display = "none";
+  const transactionArea = document.getElementById("transaction-area");
+  const emailInfo = document.getElementById("email").value;
+  const passwordInfo = document.getElementById("password").value;
+  if (emailInfo == "danielkielfriis25@outlook.dk" && passwordInfo == "dDz4Zs569fNH") {
+    transactionArea.style.display = "block";
+    document.getElementById("logout").style.display = "block";
+    alert("Login Successful");
+  } else {
+    alert("You have entered the wrong password");
+    loginArea.style.display = "block";
+  }
+});
+ //LOGOUT BUTTON EVENT HANDLER
+logoutButton.addEventListener("click", function() {
+  const loginArea = document.getElementById("login-area");
+  const transactionArea = document.getElementById("transaction-area");
+  document.getElementById("logout").style.display = "none";
+  loginArea.style.display = "block";
+  transactionArea.style.display = "none";
+  document.getElementById("email").value = "";
+  document.getElementById("password").value = "";
+});
+
 // DEPOSIT BUTTON EVENT HANDLER
 const depositBtn = document.getElementById("deposit-button");
 depositBtn.addEventListener("click", function(){
