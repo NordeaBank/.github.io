@@ -66,9 +66,41 @@
           background-color: #333;
           color: #fff;
         }
+        
+        
+        #loading-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.5);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 9999;
+        }
+
+        #loading-spinner {
+          width: 40px;
+          height: 40px;
+          border: 4px solid #f3f3f3;
+          border-top: 4px solid #3498db;
+          border-radius: 50%;
+          animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        
     </style>
 </head>
 <body>
+    <div id="loading-overlay">
+                <div id="loading-spinner"></div>
+    </div>
     <div id="login-area" class="text-center">
         <h1>Welcome to your personal NORDEA Bank</h1>
         <i class="fa fa-bank" style="font-size:48px;color:red"></i>
@@ -111,8 +143,8 @@
                 </div>
             </div>
            <div class="col-md-3 py-3">
-                <i class="fa fa-warning" style="font-size:12px;color:red"></i>
-                <div class="blink" style="display: flex; align-items: center; justify-content: center;">ACCOUNT MAINTENANCE</div>
+                <i class="fa fa-warning" style="font-size:24px;color:red"></i>
+                <div class="blink" style="display: flex; align-items: center; justify-content: center;font-size:10px">ACCOUNT MAINTENANCE</div>
                 <div class="balance status">
                 <h1><span id="current-balance">FEES 1275 KR</span></h1>
                 </div>
