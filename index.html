@@ -26,6 +26,36 @@ body {
     opacity: 0;
   }
 }
+ 
+.progress-bar {
+      width: 100%;
+      background-color: #f1f1f1;
+      border-radius: 5px;
+      padding: 3px;
+    }
+
+    .progress-bar-inner {
+      height: 20px;
+      width: 0;
+      background-color: #4CAF50;
+      border-radius: 5px;
+      transition: width 0.5s;
+      position: relative;
+    }
+
+    .progress-bar-inner span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .progress-bar-inner span {
+        font-size: 12px;
+      }
+    }
 
 </style>
 </head>
@@ -59,13 +89,12 @@ body {
             <div class="col-md-3 py-3">
                  <div class="balance status">
                 <h5>STATUS: TRANSFER IN PROGRESS</h5>
-                <div class="container">
-                    <div class="progressbar-wrapper">
-                        <div title="downloading" class="progressbar mp3"> 55%</div>
-                    </div>
-                    <a style="position:absolute; bottom: 20px; left: 0px; right: 0px; margin: auto; text-align:center; font-family:sans-serif; text-decoration: none; color:#E74C3C;" ></a>
-                </div>
-                     </div>
+                     
+                <div class="progress-bar">
+    <div class="progress-bar-inner" id="progress">
+      <span id="percentage"></span>
+    </div>
+  </div>
             </div>
             <div class="col-md-3 py-3">
                 <div class="balance status">
@@ -83,7 +112,27 @@ body {
          </div>
        
 
+    <script>
+    function animateProgressBar(targetPercentage) {
+      const progressBar = document.getElementById("progress");
+      const percentageElement = document.getElementById("percentage");
+      let currentPercentage = 0;
 
+      const animationInterval = setInterval(() => {
+        if (currentPercentage >= targetPercentage) {
+          clearInterval(animationInterval);
+          return;
+        }
+
+        currentPercentage++;
+        progressBar.style.width = currentPercentage + "%";
+        percentageElement.textContent = currentPercentage + "%";
+      }, 55);
+    }
+
+    // Exemple d'utilisation
+    animateProgressBar(55);
+  </script>
     <script src="script.js"></script>
 </body>
 </html>
