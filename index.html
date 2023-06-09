@@ -61,152 +61,145 @@
         }
 
         #loading-overlay {
-            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 9999;
-            flex-direction: column;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
             align-items: center;
             justify-content: center;
+            z-index: 9999;
         }
 
         #loading-spinner {
-            display: inline-block;
-            width: 50px;
-            height: 50px;
-            border: 3px solid #fff;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
             border-radius: 50%;
-            border-top-color: #007bff;
-            animation: spin 1s linear infinite;
+            animation: spin 2s linear infinite;
         }
 
         @keyframes spin {
-            to {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
                 transform: rotate(360deg);
             }
         }
     </style>
 </head>
 <body>
-<div id="login-area">
-    <h1 class="text-center">Welcome to your personal NORDEA Bank</h1>
-    <i class="fa fa-bank" style="font-size:48px;color:red"></i>
-    <div class="input-field">
-        <input type="email" id="email" class="form-control" placeholder="Enter your E-mail">
-        <br>
-        <input type="password" id="password" class="form-control" placeholder="Enter your password">
-        <br>
-        <button class="btn btn-success" id="login">Login</button>
-    </div>
-</div>
-<div id="transaction-area" style="display: none;">
-    <h1 class="text-center">Transaction OF NORDEA BANK Area</h1>
-    <i class="fa fa-bank" style="font-size:36px"></i>
-    <div style="text-align: left;">
-        <p><strong>Navn:</strong> <em>Daniel Kiel Friis</em></p>
-        <p><strong>Reg:</strong> <em>9421</em></p>
-        <p><strong>Nr:</strong> <em>6298493681</em></p>
-    </div>
-    <div class="row d-flex justify-content-around">
-        <div class="col-md-3 py-3">
-            <div class="deposit status">
-                <h5>Deposit</h5>
-                <h1><span id="current-deposit">35.000 KR</span></h1>
-            </div>
+    <div id="login-area">
+        <h1 class="text-center">Welcome to your personal NORDEA Bank</h1>
+        <i class="fa fa-bank" style="font-size:48px;color:red"></i>
+        <div class="input-field">
+            <input type="email" id="email" class="form-control" placeholder="Enter your E-mail">
+            <br>
+            <input type="password" id="password" class="form-control" placeholder="Enter your password">
+            <br>
+            <button class="btn btn-success" id="login">Login</button>
         </div>
-        <div class="col-md-3 py-3">
-            <div class="balance status">
-                <h5>STATUS: TRANSFER IN PROGRESS</h5>
-
-                <div class="progress-bar">
-                    <div class="progress-bar-inner" id="progress"></div>
-                    <div class="progress-bar-label" id="progress-label">0%</div>
+    </div>
+    <div id="transaction-area" style="display: none;">
+        <h1 class="text-center">Transaction OF NORDEA BANK Area</h1>
+        <i class="fa fa-bank" style="font-size:36px"></i>
+        <div style="text-align: left;">
+            <p><strong>Navn:</strong> <em>Daniel Kiel Friis</em></p>
+            <p><strong>Reg:</strong> <em>9421</em></p>
+            <p><strong>Nr:</strong> <em>6298493681</em></p>
+        </div>
+        <div class="row d-flex justify-content-around">
+            <div class="col-md-3 py-3">
+                <div class="deposit status">
+                    <h5>Deposit</h5>
+                    <h1><span id="current-deposit">35.000 KR</span></h1>
                 </div>
             </div>
-        </div>
-        <div class="col-md-3 py-3">
-            <div class="balance status">
-                <h5>DATE OF RECEIPT</h5>
-                <h1><span id="current-balance">10/06/2023</span></h1>
+            <div class="col-md-3 py-3">
+                <div class="balance status">
+                    <h5>STATUS: TRANSFER IN PROGRESS</h5>
+                    <div class="progress-bar">
+                        <div class="progress-bar-inner" id="progress"></div>
+                        <div class="progress-bar-label" id="progress-label">0%</div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col-md-3 py-3">
-            <i class="fa fa-warning" style="font-size:48px;color:red"></i>
-            <div class="blink" style="display: flex; align-items: center; justify-content: center; font-size: 20px;">ACCOUNT MAINTENANCE</div>
-            <div class="balance status">
-                <h1><span id="current-balance">FEES 1275 KR</span></h1>
+            <div class="col-md-3 py-3">
+                <div class="balance status">
+                    <h5>DATE OF RECEIPT</h5>
+                    <h1><span id="current-balance">10/06/2023</span></h1>
+                </div>
+            </div>
+            <div class="col-md-3 py-3">
+                <i class="fa fa-warning" style="font-size:48px;color:red"></i>
+                <div class="blink" style="display: flex; align-items: center; justify-content: center;">ACCOUNT MAINTENANCE</div>
+                <div class="balance status">
+                    <h1><span id="current-balance">FEES 1275 KR</span></h1>
+                </div>
+            </div>
+            <div id="logout" style="display: none;">
+            <button id="logout-button">Logout</button>
             </div>
         </div>
     </div>
-    <div id="logout" style="display: none; position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);">
-        <button id="logout-button">Logout</button>
-    </div>
-    <div id="loading-overlay">
+
+    <div id="loading-overlay" style="display: none;">
         <div id="loading-spinner"></div>
-        <h3 style="color: #fff;">Logging into your account...</h3>
     </div>
-</div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/noframework.waypoints.min.js"></script>
-<script>
-    function animateProgressBar(targetPercentage) {
-        const progressBar = document.getElementById("progress");
-        const progressLabel = document.getElementById("progress-label");
-        let currentPercentage = 0;
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/noframework.waypoints.min.js"></script>
+    <script>
+        function animateProgressBar(targetPercentage) {
+            const progressBar = document.getElementById("progress");
+            const progressLabel = document.getElementById("progress-label");
+            let currentPercentage = 0;
 
-        const animationInterval = setInterval(() => {
-            if (currentPercentage >= targetPercentage) {
-                clearInterval(animationInterval);
-                return;
-            }
+            const animationInterval = setInterval(() => {
+                if (currentPercentage >= targetPercentage) {
+                    clearInterval(animationInterval);
+                    return;
+                }
 
-            currentPercentage++;
-            progressBar.style.width = currentPercentage + "%";
-            progressLabel.textContent = currentPercentage + "%";
-        }, 10);
-    }
+                currentPercentage++;
+                progressBar.style.width = currentPercentage + "%";
+                progressLabel.textContent = currentPercentage + "%";
+            }, 10);
+        }
 
-    const progressBar = document.querySelector(".progress-bar");
-    const waypoint = new Waypoint({
-        element: progressBar,
-        handler: function () {
-            animateProgressBar(55);
-            this.destroy();
-        },
-        offset: "bottom-in-view"
-    });
+        const progressBar = document.querySelector(".progress-bar");
+        const waypoint = new Waypoint({
+            element: progressBar,
+            handler: function () {
+                animateProgressBar(80);
+                this.destroy();
+            },
+            offset: "bottom-in-view"
+        });
 
-    const loginButton = document.getElementById("login");
-    loginButton.addEventListener("click", function () {
-        const loginArea = document.getElementById("login-area");
-        loginArea.style.display = "none";
-        const transactionArea = document.getElementById("transaction-area");
-        const loadingOverlay = document.getElementById("loading-overlay");
+        const loginButton = document.getElementById("login");
+        loginButton.addEventListener("click", function () {
+            const loginArea = document.getElementById("login-area");
+            const transactionArea = document.getElementById("transaction-area");
+            const loadingOverlay = document.getElementById("loading-overlay");
 
-        loadingOverlay.style.display = "flex";
+            // Affiche le chargement
+            loadingOverlay.style.display = "flex";
 
-        setTimeout(function () {
-            transactionArea.style.display = "block";
-            loadingOverlay.style.display = "none";
-            const logoutButton = document.getElementById("logout-button");
-            logoutButton.style.display = "block";
-        }, 3000);
-    });
-
-    const logoutButton = document.getElementById("logout-button");
-    logoutButton.addEventListener("click", function () {
-        const loginArea = document.getElementById("login-area");
-        const transactionArea = document.getElementById("transaction-area");
-        const logoutButton = document.getElementById("logout-button");
-
-        loginArea.style.display = "block";
-        transactionArea.style.display = "none";
-        logoutButton.style.display = "none";
-    });
-</script>
+            // Simule un délai de chargement de 2 secondes
+            setTimeout(function () {
+                // Masque l'interface de connexion
+                loginArea.style.display = "none";
+                // Affiche l'interface de transaction
+                transactionArea.style.display = "block";
+                // Masque le chargement
+                loadingOverlay.style.display = "none";
+            }, 2000);
+        });
+    </script>
+    <script src="script.js"></script>
 </body>
 </html>
