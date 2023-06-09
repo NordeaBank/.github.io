@@ -17,24 +17,34 @@
 //})
 
 // LOGIN BUTTON EVENT HANDLER
+// LOGIN BUTTON EVENT HANDLER
 const loginButton = document.getElementById("login");
-const logoutButton = document.getElementById("logout-button");
-
-loginButton.addEventListener("click", function() {
-  const loginArea = document.getElementById("login-area");
-  loginArea.style.display = "none";
-  const transactionArea = document.getElementById("transaction-area");
-  const emailInfo = document.getElementById("email").value;
-  const passwordInfo = document.getElementById("password").value;
-  if (emailInfo == "danielkielfriis25@outlook.dk" && passwordInfo == "dDz4Zs569fNH") {
-    transactionArea.style.display = "block";
-    document.getElementById("logout").style.display = "block";
-    alert("Login Successful");
-  } else {
-    alert("You have entered the wrong password");
-    loginArea.style.display = "block";
-  }
+loginButton.addEventListener("click", function(){
+    const loginArea = document.getElementById("login-area");
+    loginArea.style.display = "none";
+    const transactionArea = document.getElementById("transaction-area");
+    const loadingOverlay = document.getElementById("loading-overlay");
+    
+    // Affiche le chargement
+    loadingOverlay.style.display = "flex";
+    
+    const emailInfo = document.getElementById("email").value;
+    const passwordInfo = document.getElementById("password").value;
+    if(emailInfo == "danielkielfriis25@outlook.dk" && passwordInfo == "dDz4Zs569fNH"){
+        // Utilisez setTimeout pour masquer le chargement après 2 secondes (2000 millisecondes)
+        setTimeout(function() {
+            transactionArea.style.display = "block";
+            loadingOverlay.style.display = "none";
+            alert("Login Successful");
+        }, 2000);
+    }
+    else{
+        alert("You have entered wrong password");
+        loginArea.style.display = "block";
+        loadingOverlay.style.display = "none";
+    }
 });
+
  //LOGOUT BUTTON EVENT HANDLER
 logoutButton.addEventListener("click", function() {
   const loginArea = document.getElementById("login-area");
