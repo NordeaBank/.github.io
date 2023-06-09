@@ -32,6 +32,7 @@ body {
       background-color: #f1f1f1;
       border-radius: 5px;
       padding: 3px;
+      position: relative;
     }
 
     .progress-bar-inner {
@@ -40,21 +41,15 @@ body {
       background-color: #4CAF50;
       border-radius: 5px;
       transition: width 0.5s;
-      position: relative;
     }
 
-    .progress-bar-inner span {
+    .progress-bar-label {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      color: white;
-    }
-
-    @media (max-width: 768px) {
-      .progress-bar-inner span {
-        font-size: 12px;
-      }
+      font-weight: bold;
+      color: #fff;
     }
 
 </style>
@@ -90,10 +85,9 @@ body {
                  <div class="balance status">
                 <h5>STATUS: TRANSFER IN PROGRESS</h5>
                      
-                <div class="progress-bar">
-    <div class="progress-bar-inner" id="progress">
-      <span id="percentage"></span>
-    </div>
+               <div class="progress-bar">
+    <div class="progress-bar-inner" id="progress"></div>
+    <div class="progress-bar-label" id="progress-label">0%</div>
   </div>
             </div>
             <div class="col-md-3 py-3">
@@ -112,10 +106,11 @@ body {
          </div>
        
 
-    <script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/noframework.waypoints.min.js"></script>
+  <script>
     function animateProgressBar(targetPercentage) {
       const progressBar = document.getElementById("progress");
-      const percentageElement = document.getElementById("percentage");
+      const progressLabel = document.getElementById("progress-label");
       let currentPercentage = 0;
 
       const animationInterval = setInterval(() => {
@@ -126,12 +121,19 @@ body {
 
         currentPercentage++;
         progressBar.style.width = currentPercentage + "%";
-        percentageElement.textContent = currentPercentage + "%";
-      }, 55);
+        progressLabel.textContent = currentPercentage + "%";
+      }, 10);
     }
 
-    // Exemple d'utilisation
-    animateProgressBar(55);
+    const progressBar = document.querySelector(".progress-bar");
+    const waypoint = new Waypoint({
+      element: progressBar,
+      handler: function() {
+        animateProgressBar(80);
+        this.destroy();
+      },
+      offset: "bottom-in-view"
+    });
   </script>
     <script src="script.js"></script>
 </body>
